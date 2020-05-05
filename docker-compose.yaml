@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  tutorial:
+    container_name: 'tutorial'
+    build:
+      context: .
+      network: host
+      dockerfile: ./dockerfiles/local.df
+    volumes:
+      - ./.:/app
+      - /app/node_modules
+    ports:
+      - 30010:4200
+    entrypoint: 'npm run local:start'

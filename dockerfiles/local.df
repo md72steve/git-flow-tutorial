@@ -1,0 +1,6 @@
+FROM tiangolo/node-frontend:10
+WORKDIR /app
+COPY ./package*.json /app/
+RUN npm ci
+
+EXPOSE 4200

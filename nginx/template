@@ -1,0 +1,27 @@
+server_tokens off;
+
+map $sent_http_content_type $expires {
+  default off;
+  text/html epoch;
+  text/css max;
+  application/javascript max; 
+}
+
+server {
+  listen 80;
+  large_client_header_buffers 4 80K;
+
+  expires $expires;
+
+  location /nginx_status {
+    stub_status on;
+    access_log off;
+  } 
+
+  location / {
+    root /usr/share/nginx/html;
+    include /etc/nginx/mime.types;
+    index index.html;
+    try_files $uri $uri/ $uri/index.html;
+  }
+}
